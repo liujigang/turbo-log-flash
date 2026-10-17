@@ -1,13 +1,12 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { Command, Message } from '../entities';
-import { trackLogManagementCommands } from '../helpers';
 import { resolveDebugRuntime } from '@/helpers/resolveDebugRuntime';
 
 export function commentAllLogMessagesCommand(): Command {
   return {
     name: 'turboConsoleLog.commentAllLogMessages',
-    handler: async ({ extensionProperties, context }) => {
+    handler: async ({ extensionProperties }) => {
       const { logFunction, logMessagePrefix, delimiterInsideMessage } =
         extensionProperties;
       const editor: vscode.TextEditor | undefined =
@@ -51,8 +50,6 @@ export function commentAllLogMessagesCommand(): Command {
         .then(async (applied) => {
           if (applied) {
             await document.save();
-            // Track log management command usage
-            trackLogManagementCommands(context, 'comment');
           }
         });
     },

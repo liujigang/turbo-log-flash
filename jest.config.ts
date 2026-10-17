@@ -15,8 +15,8 @@ const config: Config = {
     ],
   },
   transformIgnorePatterns: [
-    // Transform ESM in these dependencies so Jest can load them
-    '/node_modules/(?!(?:@sveltejs/acorn-typescript|acorn-jsx)/)',
+    // Transform ESM in these dependencies so Jest can load them (supports npm and pnpm paths)
+    'node_modules/(?!.*(@sveltejs/acorn-typescript|acorn-jsx))',
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',

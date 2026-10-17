@@ -6,7 +6,6 @@ type CommandHandlerProperties = {
   context: vscode.ExtensionContext;
   extensionProperties: ExtensionProperties;
   args?: unknown[];
-  launcherView?: vscode.TreeView<unknown>;
 };
 
 export type Command = {

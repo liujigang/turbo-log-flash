@@ -1,9 +1,9 @@
 {
-  "name": "turbo-console-log",
-  "displayName": "Turbo Console Log",
-  "description": "Insert debug logs in one keystroke — and with Pro, automatically remove them before every commit. AST-powered logging for JavaScript, TypeScript, Python, and PHP.",
+  "name": "turbo-console-log-flash",
+  "displayName": "Turbo Console Log Flash",
+  "description": "Insert debug logs in one keystroke. AST-powered logging for JavaScript, TypeScript, Python, and PHP.",
   "version": "3.29.0",
-  "publisher": "ChakrounAnas",
+  "publisher": "best-dev",
   "engines": {
     "vscode": "^1.94.0"
   },
@@ -25,9 +25,7 @@
     "var_dump",
     "print_r",
     "error_log",
-    "log management",
     "productivity",
-    "log panel",
     "developer tools",
     "multi-language",
     "laravel",
@@ -37,7 +35,6 @@
     "ast parser"
   ],
   "activationEvents": [
-    "onStartupFinished",
     "onLanguage:javascript",
     "onLanguage:javascriptreact",
     "onLanguage:typescript",
@@ -45,20 +42,7 @@
     "onLanguage:php",
     "onLanguage:python"
   ],
-  "extensionDependencies": [
-    "vscode.git"
-  ],
   "main": "./out/extension.js",
-  "files": [
-    "out/extension.js",
-    "out/hooks/pre-commit-hook.js",
-    "images/icon.png",
-    "images/turbo-release-update.png",
-    "README.md",
-    "CHANGELOG.md",
-    "LICENSE.txt",
-    "package.json"
-  ],
   "contributes": {
     "configuration": {
       "type": "object",
@@ -138,20 +122,6 @@
           "type": "string",
           "default": "log",
           "description": "Specify the log function to use with 'displayCustomLogMessage' command. "
-        },
-        "turboConsoleLog.isTurboTelemetryEnabled": {
-          "type": "boolean",
-          "default": true,
-          "description": "Enable anonymous telemetry for Turbo Console Log analytics (respects VS Code's global telemetry settings). This helps improve the extension but never collects personal information.",
-          "tags": [
-            "telemetry",
-            "usesOnlineServices"
-          ]
-        },
-        "turboConsoleLog.dynamicFreemiumPanel": {
-          "type": "boolean",
-          "default": true,
-          "description": "Enable dynamic content fetching for the freemium panel. Recommended to keep enabled for the latest features and updates."
         }
       }
     },
@@ -203,42 +173,6 @@
       {
         "command": "turboConsoleLog.correctAllLogMessages",
         "title": "Turbo Console Log: Correct Turbo Log Messages"
-      },
-      {
-        "command": "turboConsoleLog.activateTurboProBundle",
-        "title": "Turbo Console Log: Activate Turbo Pro Bundle"
-      },
-      {
-        "command": "turboConsoleLogPro.hideLogs",
-        "title": "Turbo Console Log Pro: Hide Logs"
-      },
-      {
-        "command": "turboConsoleLogPro.showLogs",
-        "title": "Turbo Console Log Pro: Show Logs"
-      },
-      {
-        "command": "turboConsoleLogPro.logCleanupFromConfig",
-        "title": "Turbo Console Log Pro: Delete Logs From Config"
-      },
-      {
-        "command": "turboConsoleLogPro.commentLogsFromConfig",
-        "title": "Turbo Console Log Pro: Comment Logs From Config"
-      },
-      {
-        "command": "turboConsoleLogPro.uncommentLogsFromConfig",
-        "title": "Turbo Console Log Pro: Uncomment Logs From Config"
-      },
-      {
-        "command": "turboConsoleLogPro.toggleExpand",
-        "title": "Turbo Console Log Pro: Toggle Expand"
-      },
-      {
-        "command": "turboConsoleLogPro.searchLogs",
-        "title": "Turbo Console Log Pro: Search Logs"
-      },
-      {
-        "command": "turboConsoleLog.showReleasePanel",
-        "title": "Turbo Console Log: What's New"
       }
     ],
     "keybindings": [
@@ -313,191 +247,65 @@
         "key": "alt+shift+x",
         "mac": "alt+shift+x",
         "when": "editorTextFocus"
-      },
-      {
-        "command": "turboConsoleLog.activateTurboProBundle",
-        "key": "alt+shift+p",
-        "mac": "alt+shift+p",
-        "when": "editorTextFocus"
       }
-    ],
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "turboConsoleLogProPanelContainer",
-          "title": "TCL",
-          "icon": "images/icon.png"
-        },
-        {
-          "id": "turboConsoleLogReleasePanelContainer",
-          "title": "TCL",
-          "icon": "images/turbo-release-update.png"
-        }
-      ]
-    },
-    "views": {
-      "turboConsoleLogProPanelContainer": [
-        {
-          "id": "turboConsoleLogProView",
-          "name": "PRO Panel",
-          "icon": "images/icon.png",
-          "when": "turboConsoleLog:isInitialized && turboConsoleLog:isPro && !turboConsoleLog:isNewRelease"
-        },
-        {
-          "id": "turboConsoleLogLogFiltersView",
-          "name": "Log Filters",
-          "icon": "images/icon.png",
-          "when": "turboConsoleLog:isInitialized && turboConsoleLog:isPro && !turboConsoleLog:isNewRelease"
-        },
-        {
-          "id": "turboConsoleLogLogCleanupConfigView",
-          "name": "Log Cleanup Config",
-          "icon": "images/icon.png",
-          "when": "turboConsoleLog:isInitialized && turboConsoleLog:isPro && !turboConsoleLog:isNewRelease"
-        },
-        {
-          "id": "turboConsoleLogFreemiumLauncher",
-          "name": "Become Pro",
-          "icon": "images/icon.png",
-          "when": "turboConsoleLog:isInitialized && !turboConsoleLog:isPro && !turboConsoleLog:isRepairMode && turboConsoleLog:isLauncherMode && !turboConsoleLog:isNewRelease"
-        },
-        {
-          "id": "turboConsoleLogFreemiumPanel",
-          "name": "Turbo Console Log Freemium",
-          "icon": "images/icon.png",
-          "type": "webview",
-          "when": "turboConsoleLog:isInitialized && !turboConsoleLog:isPro && !turboConsoleLog:isRepairMode && !turboConsoleLog:isLauncherMode && !turboConsoleLog:isNewRelease"
-        },
-        {
-          "id": "turboConsoleLogBundleRepairPanel",
-          "name": "Bundle Repair Mode",
-          "icon": "images/icon.png",
-          "type": "webview",
-          "when": "turboConsoleLog:isInitialized && turboConsoleLog:isRepairMode"
-        }
-      ],
-      "turboConsoleLogReleasePanelContainer": [
-        {
-          "id": "turboConsoleLogReleasePanelLauncher",
-          "name": "What's New",
-          "icon": "images/turbo-release-update.png",
-          "when": "turboConsoleLog:isInitialized && turboConsoleLog:isNewRelease && turboConsoleLog:isReleaseLauncherMode"
-        },
-        {
-          "id": "turboConsoleLogReleasePanel",
-          "name": "What's New",
-          "icon": "images/turbo-release-update.png",
-          "type": "webview",
-          "when": "turboConsoleLog:isInitialized && turboConsoleLog:isNewRelease && !turboConsoleLog:isReleaseLauncherMode"
-        }
-      ]
-    },
-    "menus": {
-      "view/title": [
-        {
-          "command": "turboConsoleLogPro.searchLogs",
-          "when": "view == turboConsoleLogProView",
-          "group": "navigation",
-          "icon": "$(search)"
-        }
-      ],
-      "view/item/context": [
-        {
-          "command": "turboConsoleLogPro.hideLogs",
-          "when": "viewItem == fileLogsNode",
-          "group": "turbo@0"
-        },
-        {
-          "command": "turboConsoleLogPro.showLogs",
-          "when": "viewItem == hiddenFileLogsNode",
-          "group": "turbo@0"
-        },
-        {
-          "command": "turboConsoleLogPro.commentLogsFromConfig",
-          "when": "viewItem == fileLogsNode",
-          "group": "turbo@1"
-        },
-        {
-          "command": "turboConsoleLogPro.uncommentLogsFromConfig",
-          "when": "viewItem == fileLogsNode",
-          "group": "turbo@2"
-        },
-        {
-          "command": "turboConsoleLogPro.logCleanupFromConfig",
-          "when": "viewItem == fileLogsNode",
-          "group": "turbo@3"
-        }
-      ]
-    }
+    ]
   },
   "scripts": {
-    "vscode:prepublish": "rm -rf out && npm run esbuild-base -- --minify && npm run copy-hooks",
-    "copy-hooks": "mkdir -p out/hooks && cp src/hooks/pre-commit-hook.js out/hooks/pre-commit-hook.js",
+    "package": "vsce package --no-dependencies",
+    "vscode:prepublish": "rm -rf out && pnpm run esbuild-base --minify",
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
     "esbuild-base-minify": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --minify",
     "esbuild-base-minify-analyze": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --minify --analyze",
-    "esbuild": "npm run esbuild-base -- --sourcemap && npm run copy-hooks",
-    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "watch": "npm run esbuild --watch",
+    "esbuild": "pnpm run esbuild-base --sourcemap",
+    "esbuild-watch": "pnpm run esbuild-base --sourcemap --watch",
+    "watch": "pnpm run esbuild --watch",
     "lint": "tsc --noEmit && tsc --project src/jest-tests/tsconfig.json --noEmit && eslint src --ext ts",
-    "pretest": "yarn run esbuild-base",
+    "pretest": "pnpm run esbuild-base",
     "test:compile": "rm -rf out && tsc -p ./ && mkdir out/mocha-tests/files && cp -r src/mocha-tests/files/ out/mocha-tests/files/",
-    "test": "npm run test:compile && npm run test:jest && node ./out/mocha-tests/runTests.js",
+    "test": "pnpm run test:compile && pnpm run test:jest && node ./out/mocha-tests/runTests.js",
     "test:jest": "jest --config jest.config.ts",
     "test:jest:coverage": "jest --config jest.config.ts --coverage",
-    "test:jest:coverage:report": "jest --config jest.config.ts --coverage && open ./coverage/lcov-report/index.html"
+    "test:jest:coverage:report": "pnpm run test:jest:coverage && open ./coverage/lcov-report/index.html"
   },
   "devDependencies": {
-    "@types/acorn": "^6.0.4",
-    "@types/chai": "^5.0.0",
-    "@types/glob": "^7.1.3",
+    "@eslint/js": "^9.39.5",
+    "@types/chai": "^4.3.20",
+    "@types/glob": "^7.2.0",
     "@types/jest": "^30.0.0",
-    "@types/mocha": "^8.0.0",
-    "@types/node": "^24.0.3",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.19.2",
     "@types/vscode": "^1.94.0",
-    "@typescript-eslint/eslint-plugin": "^8.32.1",
-    "@typescript-eslint/parser": "^8.32.1",
-    "@vscode/test-electron": "^2.4.1",
-    "chai": "^4.3.7",
-    "chalk": "^4.1.0",
-    "esbuild": "^0.25.4",
-    "eslint": "^9.27.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "glob": "^7.1.6",
-    "jest": "^30.0.0",
-    "mocha": "^11.2.2",
-    "prettier": "^3.5.3",
-    "ts-jest": "^29.4.0",
-    "ts-node": "^10.9.1",
-    "typescript-eslint": "^8.32.1",
-    "vscode-test": "^1.6.1"
+    "@typescript-eslint/eslint-plugin": "^8.71.2",
+    "@typescript-eslint/parser": "^8.71.2",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^4.0.0",
+    "chai": "^4.5.0",
+    "esbuild": "^0.25.12",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.7",
+    "glob": "^7.2.3",
+    "jest": "^30.5.2",
+    "mocha": "^11.8.0",
+    "prettier": "^3.9.10",
+    "ts-jest": "^29.4.15",
+    "ts-node": "^10.9.2",
+    "typescript-eslint": "^8.71.2"
   },
   "license": "SEE LICENSE IN LICENSE.txt",
   "bugs": {
-    "url": "https://github.com/Chakroun-Anas/turbo-console-log/issues",
-    "email": "chakroun.anas@outlook.com"
+    "url": "https://github.com/liujigang/turbo-console-log-flash/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Chakroun-Anas/turbo-console-log"
-  },
-  "__metadata": {
-    "id": "6623619a-676d-4cde-943f-a3c193b44fc0",
-    "publisherDisplayName": "ChakrounAnas",
-    "publisherId": "4fecec8e-335d-44fc-ab16-5356745fb1ac",
-    "isPreReleaseVersion": false
+    "url": "https://github.com/liujigang/turbo-console-log-flash.git"
   },
   "dependencies": {
-    "@lezer/common": "^1.5.2",
+    "@lezer/common": "^1.5.3",
     "@lezer/python": "^1.1.19",
-    "@sveltejs/acorn-typescript": "^1.0.9",
-    "acorn": "^8.15.0",
-    "axios": "^1.17.0",
-    "fast-glob": "^3.3.3",
-    "ignore": "^7.0.5",
-    "p-limit": "^6.2.0",
-    "php-parser": "^3.2.5"
+    "@sveltejs/acorn-typescript": "^1.0.13",
+    "acorn": "^8.19.0",
+    "php-parser": "^3.7.0"
   },
   "overrides": {
     "flatted": "3.4.2",

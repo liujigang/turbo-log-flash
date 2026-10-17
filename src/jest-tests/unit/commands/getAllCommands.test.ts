@@ -79,13 +79,6 @@ jest.mock('@/commands/correctAllLogMessages', () => ({
   }),
 }));
 
-jest.mock('@/commands/activateTurboProBundle', () => ({
-  activateTurboProBundleCommand: () => ({
-    name: 'turboConsoleLog.activatePro',
-    handler: jest.fn(),
-  }),
-}));
-
 describe('getAllCommands', () => {
   test('should return all expected commands', () => {
     const commands = getAllCommands();
@@ -103,7 +96,6 @@ describe('getAllCommands', () => {
       'turboConsoleLog.uncommentAllLogMessages',
       'turboConsoleLog.deleteAllLogMessages',
       'turboConsoleLog.correctAllLogMessages',
-      'turboConsoleLog.activatePro',
     ];
 
     expect(Array.isArray(commands)).toBe(true);

@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { Command, Message } from '../entities';
-import { trackLogManagementCommands } from '../helpers';
 import { resolveDebugRuntime } from '@/helpers/resolveDebugRuntime';
 
 function escapeRegex(value: string): string {
@@ -11,7 +10,7 @@ function escapeRegex(value: string): string {
 export function uncommentAllLogMessagesCommand(): Command {
   return {
     name: 'turboConsoleLog.uncommentAllLogMessages',
-    handler: async ({ extensionProperties, context }) => {
+    handler: async ({ extensionProperties }) => {
       const { logFunction, logMessagePrefix, delimiterInsideMessage } =
         extensionProperties;
       const editor: vscode.TextEditor | undefined =
@@ -64,8 +63,6 @@ export function uncommentAllLogMessagesCommand(): Command {
         .then(async (applied) => {
           if (applied) {
             await document.save();
-            // Track log management command usage
-            trackLogManagementCommands(context, 'uncomment');
           }
         });
     },

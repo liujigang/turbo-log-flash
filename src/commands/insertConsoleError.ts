@@ -1,13 +1,12 @@
 import * as vscode from 'vscode';
 import { Command } from '../entities';
 import { getTabSize } from '../utilities';
-import { trackLogInsertions } from '../helpers';
 import { insertForSelections } from './commandRuntime';
 
 export function insertConsoleErrorCommand(): Command {
   return {
     name: 'turboConsoleLog.insertConsoleError',
-    handler: async ({ extensionProperties, context }) => {
+    handler: async ({ extensionProperties }) => {
       const editor: vscode.TextEditor | undefined =
         vscode.window.activeTextEditor;
       if (!editor) {
@@ -21,9 +20,6 @@ export function insertConsoleErrorCommand(): Command {
         'error',
         tabSize,
       );
-
-      // Track logs insertions
-      trackLogInsertions(context);
     },
   };
 }

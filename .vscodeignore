@@ -1,17 +1,16 @@
 # Ignore everything by default
 **/*
 
-# Include only the files specified in package.json "files" array
+# Whitelist directories
+!out/
+!images/
+
+# Whitelist files
 !out/extension.js
-!out/hooks/pre-commit-hook.js
 !images/icon.png
-!images/turbo-release-update.png
+images/turbo-release-update.png
 !README.md
+!README.zh-CN.md
 !CHANGELOG.md
 !LICENSE.txt
 !package.json
-
-# Ensure parent directories are not ignored (required for nested paths)
-!out/
-!out/hooks/
-!images/

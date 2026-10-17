@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { Command, Message } from '../entities';
 import { showNotification } from '../ui';
-import { trackLogManagementCommands } from '../helpers';
 import { resolveDebugRuntime } from '@/helpers/resolveDebugRuntime';
 
 function getFilenameFromLogMessage(
@@ -19,7 +18,7 @@ function getFilenameFromLogMessage(
 export function correctAllLogMessagesCommand(): Command {
   return {
     name: 'turboConsoleLog.correctAllLogMessages',
-    handler: async ({ extensionProperties, context }) => {
+    handler: async ({ extensionProperties }) => {
       const editor: vscode.TextEditor | undefined =
         vscode.window.activeTextEditor;
       if (!editor) {
@@ -107,8 +106,6 @@ export function correctAllLogMessagesCommand(): Command {
         .then(async (applied) => {
           if (applied && edits.length > 0) {
             await document.save();
-            // Track log management command usage
-            trackLogManagementCommands(context, 'correct');
           }
           if (extensionProperties.logCorrectionNotificationEnabled) {
             const editCount = edits.length;

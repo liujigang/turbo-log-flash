@@ -1,13 +1,12 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { Command, Message } from '../entities';
-import { trackLogManagementCommands } from '../helpers';
 import { resolveDebugRuntime } from '@/helpers/resolveDebugRuntime';
 
 export function deleteAllLogMessagesCommand(): Command {
   return {
     name: 'turboConsoleLog.deleteAllLogMessages',
-    handler: async ({ extensionProperties, context }) => {
+    handler: async ({ extensionProperties }) => {
       const { logFunction, logMessagePrefix, delimiterInsideMessage } =
         extensionProperties;
       const editor: vscode.TextEditor | undefined =
@@ -73,8 +72,6 @@ export function deleteAllLogMessagesCommand(): Command {
         .then(async (applied) => {
           if (applied) {
             await document.save();
-            // Track log management command usage
-            trackLogManagementCommands(context, 'delete');
           }
         });
     },

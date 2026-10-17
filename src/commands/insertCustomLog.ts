@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import { Command } from '../entities';
 import { getTabSize } from '../utilities';
-import { trackLogInsertions } from '../helpers';
 import { insertForSelections } from './commandRuntime';
 
 const PHP_DEBUGGING_COMMANDS_MESSAGE =
@@ -10,7 +9,7 @@ const PHP_DEBUGGING_COMMANDS_MESSAGE =
 export function insertCustomLogCommand(): Command {
   return {
     name: 'turboConsoleLog.insertCustomLog',
-    handler: async ({ extensionProperties, context }) => {
+    handler: async ({ extensionProperties }) => {
       const editor: vscode.TextEditor | undefined =
         vscode.window.activeTextEditor;
       if (!editor) {
@@ -30,9 +29,6 @@ export function insertCustomLogCommand(): Command {
         'custom',
         tabSize,
       );
-
-      // Track logs insertions
-      trackLogInsertions(context);
     },
   };
 }
