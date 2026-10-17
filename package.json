@@ -294,11 +294,11 @@
   },
   "license": "SEE LICENSE IN LICENSE.txt",
   "bugs": {
-    "url": "https://github.com/liujigang/turbo-console-log-flash/issues"
+    "url": "https://github.com/liujigang/turbo-log-flash/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/liujigang/turbo-console-log-flash.git"
+    "url": "https://github.com/liujigang/turbo-log-flash.git"
   },
   "dependencies": {
     "@lezer/common": "^1.5.3",
