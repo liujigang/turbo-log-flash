@@ -1,5 +1,5 @@
 {
-  "name": "turbo-console-log-flash",
+  "name": "turbo-log-flash",
   "displayName": "Turbo Console Log Flash",
   "description": "Insert debug logs in one keystroke. AST-powered logging for JavaScript, TypeScript, Python, and PHP.",
   "version": "3.29.0",
