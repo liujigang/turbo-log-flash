@@ -1,6 +1,6 @@
 {
   "name": "turbo-log-flash",
-  "displayName": "Turbo Console Log Flash",
+  "displayName": "Turbo Log Flash",
   "description": "Insert debug logs in one keystroke. AST-powered logging for JavaScript, TypeScript, Python, and PHP.",
   "version": "3.29.0",
   "publisher": "best-dev",
@@ -298,7 +298,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/liujigang/turbo-log-flash.git"
+    "url": "https://github.com/liujigang/turbo-console-log-flash.git"
   },
   "dependencies": {
     "@lezer/common": "^1.5.3",
